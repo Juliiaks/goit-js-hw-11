@@ -33,12 +33,14 @@ function handleSubmit(event) {
             });
        return;
     };
-    // showLoader();
+    // showLoader(); ---Не працює
     apiPixabay(searchWord);
-    // hideLoader();
+    // hideLoader(); ----Не працює
     form.reset()  
 }
 
+
+// Не працює
 // function showLoader() {
 //     const loader = document.querySelector(".loader").classList.add("active");
 //     return loader;

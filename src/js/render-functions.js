@@ -5,7 +5,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 export function addPictures(images) {
-    document.querySelector(".gallery").innerHTML = "<span class='loader'></span>";
+    // document.querySelector(".gallery").innerHTML = "<span class='loader'></span>";(не працює)
      document.querySelector(".gallery").innerHTML = "";
     const imagesGallery = images
   .map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => {
