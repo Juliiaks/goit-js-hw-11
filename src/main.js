@@ -14,12 +14,12 @@ const searchButton = document.querySelector("button");
 const loader = document.querySelector(".loader");
 
 
-window.addEventListener("load", () => {
-    loader.classList.add("hide");
-    loader.addEventListener("transitionend", () => {
-        document.body.removeChild("loader");
-    })
-})
+// window.addEventListener("load", () => {
+//     loader.classList.add("hide");
+//     loader.addEventListener("transitionend", () => {
+//         document.body.removeChild("loader");
+//     })
+// })
    
 form.addEventListener("submit", handleSubmit);
 function handleSubmit(event) {
@@ -42,7 +42,7 @@ function handleSubmit(event) {
        return;
     };
 
-   
+    loader.classList.remove("hide");
     apiPixabay(searchWord)
         .then(data => {
             if (data.hits.length === 0) {
@@ -64,26 +64,21 @@ function handleSubmit(event) {
             console.log("catch", error);
         })
     .finally(() => {
-
-    form.reset(); 
+        form.reset(); 
+       
     })
-        
+         loader.classList.add("hide")
 
 } 
 
 
 
 // function showLoader() {
-//     if (loader) {
-//         loader.style.display = "block";
-//     }
- 
+//    loader.classList.remove(".hide")
         
 //     }
 
 // function hideLoader(){
-//    if (loader) {
-//         loader.style.display = "none";
-//     }
+//   loader.classList.add(".hide")
 // }
 

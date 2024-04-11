@@ -138,6 +138,5 @@ width: 320px;
 }
 
 .hide{
-  opacity: 0;
-  visibility: hidden;
+  display: none;
 }
