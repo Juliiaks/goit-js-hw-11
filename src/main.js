@@ -1,6 +1,7 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css"
 import { apiPixabay } from "./js/pixabay-api";
+import { addPictures } from "./js/render-functions";
 // import SimpleLightbox from "simplelightbox";
 // import "simplelightbox/dist/simple-lightbox.min.css";
 
@@ -10,16 +11,23 @@ import { apiPixabay } from "./js/pixabay-api";
 
 const form = document.querySelector(".form");
 const searchButton = document.querySelector("button");
+const loader = document.querySelector(".loader");
 
+
+window.addEventListener("load", () => {
+    loader.classList.add("hide");
+    loader.addEventListener("transitionend", () => {
+        document.body.removeChild("loader");
+    })
+})
+   
 form.addEventListener("submit", handleSubmit);
-
-
 function handleSubmit(event) {
     event.preventDefault();
-
+    
     const input = document.querySelector("#pictures");
     const searchWord = input.value.trim();
-    
+
     if (searchWord === "") {
         console.log("empty");
           iziToast.show({
@@ -33,21 +41,49 @@ function handleSubmit(event) {
             });
        return;
     };
-    // showLoader(); ---Не працює
-    apiPixabay(searchWord);
-    // hideLoader(); ----Не працює
-    form.reset()  
-}
+
+   
+    apiPixabay(searchWord)
+        .then(data => {
+            if (data.hits.length === 0) {
+                iziToast.show({
+                    message: `Sorry, there are no images matching your search query. Please try again!`,
+                    messageColor: "#fff",
+                    position: "topRight",
+                    backgroundColor: "#ef4040",
+                    progressBar: false,
+                    close: false,
+                    timeout: 5000,
+            });
+           
+            }
+            console.log(data);
+            addPictures(data.hits);
+        })
+        .catch(error => {
+            console.log("catch", error);
+        })
+    .finally(() => {
+
+    form.reset(); 
+    })
+        
+
+} 
 
 
-// Не працює
+
 // function showLoader() {
-//     const loader = document.querySelector(".loader").classList.add("active");
-//     return loader;
+//     if (loader) {
+//         loader.style.display = "block";
+//     }
+ 
         
 //     }
 
-// function hideLoader() {
-//     const loader = document.querySelector(".loader").classList.remove("active")
-//     return loader;
+// function hideLoader(){
+//    if (loader) {
+//         loader.style.display = "none";
+//     }
 // }
+
