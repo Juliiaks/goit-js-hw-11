@@ -27,7 +27,7 @@ function handleSubmit(event) {
    
     const input = document.querySelector("#pictures");
     const searchWord = input.value.trim();
-
+document.querySelector(".gallery").innerHTML = "";
     if (searchWord === "") {
         console.log("empty");
           iziToast.show({
@@ -42,8 +42,8 @@ function handleSubmit(event) {
         
        return;
     };
-    
-     document.querySelector(".gallery").innerHTML = "";
+
+     
     loader.classList.remove("hide");
    
     apiPixabay(searchWord)
