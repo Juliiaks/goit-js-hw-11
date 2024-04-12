@@ -48,8 +48,8 @@ export function addPictures(images) {
   }).join(" ");
    
     document.querySelector(".gallery").insertAdjacentHTML("beforeend", imagesGallery);
-     
+    lightbox.refresh(); 
+ 
 }
   
-lightbox.refresh(); 
 
