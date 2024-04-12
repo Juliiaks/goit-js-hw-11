@@ -24,7 +24,7 @@ const loader = document.querySelector(".loader");
 form.addEventListener("submit", handleSubmit);
 function handleSubmit(event) {
     event.preventDefault();
-    
+   
     const input = document.querySelector("#pictures");
     const searchWord = input.value.trim();
 
@@ -38,11 +38,14 @@ function handleSubmit(event) {
                     progressBar: false,
                     close: false,
                     timeout: 5000,
-            });
+          });
+        
        return;
     };
-
+    
+     document.querySelector(".gallery").innerHTML = "";
     loader.classList.remove("hide");
+   
     apiPixabay(searchWord)
         .then(data => {
             if (data.hits.length === 0) {
@@ -59,26 +62,20 @@ function handleSubmit(event) {
             }
             console.log(data);
             addPictures(data.hits);
+           
         })
         .catch(error => {
             console.log("catch", error);
         })
     .finally(() => {
         form.reset(); 
-       
+       loader.classList.add("hide");
     })
-         loader.classList.add("hide")
+         
 
 } 
 
 
 
-// function showLoader() {
-//    loader.classList.remove(".hide")
-        
-//     }
 
-// function hideLoader(){
-//   loader.classList.add(".hide")
-// }
 
